@@ -39,44 +39,38 @@ module.exports = function(grunt) {
 			for(var i = 0; i<_updateVersion.length; i++)
 			{
 				var data = _updateVersion[i];
-				  				
-				var path = 'https://rink.hockeyapp.net/api/2/apps/'+data.appId+'/app_versions/'+data.versionID;				 
-				console.log('Uploading : '+ data.filePath + ' To: ' + path );
-
+				  console.log('File page: ' + data.filePath);
+				
+				var path = 'https://rink.hockeyapp.net/api/2/apps/'+data.appId+'/app_versions/'+data.versionID;
+				 console.log('Path: ' + path);
 				var data = _updateVersion[i];
 				
-				function(numberOfUploads, finishedUploads)
-				{
-				   var _data = data;
-				   var _asyncHandle = asyncHandle;
-				   
 				request.put({								
 							  headers:{
-								  'X-HockeyAppToken':_data.apiKey,
+								  'X-HockeyAppToken':data.apiKey,
 								   'accept': '*/*'},
 							  url: path,
 							  formData: {    
-								ipa: fs.createReadStream(_data.filePath)
+								ipa: fs.createReadStream(data.filePath)
 							  }
-						}, function(err,httpResponse,body)
-							{	
-							
-							   if (!err)
-							   {
-								   grunt.log.ok(_data.filePath + ' uploaded successfully');
-							   }
-							   else
-							   {
-								   grunt.log.error(_data.filepath + ' error uploading: ' + err);
-							   }
-								finishedUploads++;
-								if (numberOfUploads == finishedUploads)
-								{
-									_asyncHandle();
-									grunt.log.ok('Finished uploading all files');
-								}
-							});
-				}(numberOfUploads, finishedUploads);
+							}, function(err,httpResponse,body)
+								{	
+								
+								   if (!err)
+								   {
+									   grunt.log.ok('file uploaded successfully');
+								   }
+								   else
+								   {
+									   grunt.log.error('error uploading: ' + err);
+								   }
+									finishedUploads++;
+									if (numberOfUploads == finishedUploads)
+									{
+										asyncHandle();
+										grunt.log.ok('Finished uploading all files');
+									}
+								});
 		
 			}
 			}
