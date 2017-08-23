@@ -51,6 +51,7 @@ module.exports = function(grunt) {
 								   'accept': '*/*'},
 							  url: path,
 							  formData: {    
+								status: '2',
 								ipa: fs.createReadStream(data.filePath)
 							  }
 							}, function(err,httpResponse,body)
