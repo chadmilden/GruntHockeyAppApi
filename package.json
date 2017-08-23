@@ -1,7 +1,7 @@
 {
   "name": "grunt-hockeyappapi",
   "description": "Api calls for Hockey App",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "homepage": "https://github.com/chadmilden/GruntHockeyAppApi",
   "author": {
     "name": "Chad Mildenberger",
