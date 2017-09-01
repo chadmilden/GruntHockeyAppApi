@@ -21,7 +21,8 @@ module.exports = function(grunt) {
 		
 		var done = this.async();
 		
-		var _updateVersion = grunt.config.get('hockeyAppApi.updateVersion')
+		var _updateVersion = this.data.updateVersion;
+			
 			const http = require('http');	
 			const fs = require('fs');
 			const request = require('request');
